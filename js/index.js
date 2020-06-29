@@ -152,14 +152,15 @@ function createGround() {
   world.add(groundBody)
 
   //const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
-  const groundMaterial = new THREE.TextureLoader().load('img/grasslight-big.jpg')
-  groundMaterial.repeat.set(25, 25)
-  groundMaterial.anisotropy = 16
-  groundMaterial.encoding = THREE.sRGBEncoding;
+  var groundTexture = loader.load('img/grasslight-big.jpg')
+  groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+  groundTexture.repeat.set(25, 25);
+  groundTexture.anisotropy = 16;
+  groundTexture.encoding = THREE.sRGBEncoding;
 
-  const skinMat = new THREE.MeshPhongMaterial( {map: groundMaterial} )
+  var groundMaterial = new THREE.MeshLambertMaterial({ map: groundTexture })
 
-  let ground = new THREE.Mesh(new THREE.PlaneBufferGeometry( 20000, 20000 ), skinMat)
+  var ground = new THREE.Mesh(new THREE.PlaneBufferGeometry(20000, 20000), groundMaterial)
   ground.rotation.x = -Math.PI / 2
   ground.receiveShadow = true
   ground.name = 'floor'
@@ -177,7 +178,7 @@ function initGameData() {
 
 function createCreeper() {
   for (let i = 0; i < 10; i++) {
-    creeperObj[i] = new Creeper(1, 1, i-5)
+    creeperObj[i] = new Creeper(1, 1, i - 5)
     scene.add(creeperObj[i].creeper)
     world.addBody(creeperObj[i].headBody)
     world.addBody(creeperObj[i].bodyBody)
@@ -266,7 +267,7 @@ function getShootDir(event, targetVec) {
 }
 
 // shooting event
-window.addEventListener('click', function(e) {
+window.addEventListener('click', function (e) {
   if (controls.enabled == true) {
     // 取得目前玩家位置
     let x = playerBody.position.x
@@ -426,7 +427,7 @@ function render() {
   renderer.render(scene, camera)
 }
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
