@@ -177,7 +177,7 @@ function initGameData() {
 
 function createCreeper() {
   for (let i = 0; i < 10; i++) {
-    creeperObj[i] = new Creeper(1, 1, i-5)
+    creeperObj[i] = new Creeper(1, 1, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 10)
     scene.add(creeperObj[i].creeper)
     world.addBody(creeperObj[i].headBody)
     world.addBody(creeperObj[i].bodyBody)

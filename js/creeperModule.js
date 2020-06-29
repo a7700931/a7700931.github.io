@@ -1,6 +1,6 @@
 // 苦力怕物件
 class Creeper {
-  constructor(sizeScale, massScale, index) {
+  constructor(sizeScale, massScale, index,index2) {
     const headGeo = new THREE.CylinderGeometry(
       1 * sizeScale,
       1 * sizeScale,
@@ -44,66 +44,66 @@ class Creeper {
 
     //頭
     this.head = new THREE.Mesh(headGeo, wineMat)
-    this.head.position.set(index * 10, 12 * sizeScale, index * 10)
+    this.head.position.set(index * 10, 12 * sizeScale, index2 * 10)
 
     const headShape = new CANNON.Cylinder(
       1 * sizeScale, 1 * sizeScale, 1 * sizeScale, 10
     )
     this.headBody = new CANNON.Body({
       mass: 1 * massScale,
-      position: new CANNON.Vec3(index * 10, 12 * sizeScale, index * 10)
+      position: new CANNON.Vec3(index * 10, 12 * sizeScale, index2 * 10)
     })
     this.headBody.addShape(headShape)
 
     //身1
     this.body = new THREE.Mesh(bodyGeo, wineMat)
-    this.body.position.set(index * 10, 10.5 * sizeScale, index * 10)
+    this.body.position.set(index * 10, 10.5 * sizeScale, index2 * 10)
 
     const bodyShape = new CANNON.Cylinder(
       1 * sizeScale, 1 * sizeScale, 5 * sizeScale, 10
     )
     this.bodyBody = new CANNON.Body({
       mass: 1 * massScale,
-      position: new CANNON.Vec3(index * 10, 10.5 * sizeScale, index * 10)
+      position: new CANNON.Vec3(index * 10, 10.5 * sizeScale, index2 * 10)
     })
     this.bodyBody.addShape(bodyShape)
 
     //身2
     this.body2 = new THREE.Mesh(bodyGeo2, skinMat)
-    this.body2.position.set(index * 10, 8 * sizeScale, index * 10)
+    this.body2.position.set(index * 10, 8 * sizeScale, index2 * 10)
 
     const bodyShape2 = new CANNON.Cylinder(
       1 * sizeScale, 1 * sizeScale, 5 * sizeScale, 10
     )
     this.bodyBody2 = new CANNON.Body({
       mass: 1 * massScale,
-      position: new CANNON.Vec3(index * 10, 8 * sizeScale, index * 10)
+      position: new CANNON.Vec3(index * 10, 8 * sizeScale, index2 * 10)
     })
     this.bodyBody2.addShape(bodyShape2)
 
     //身3
     this.body3 = new THREE.Mesh(bodyGeo3, skinMat)
-    this.body3.position.set(index * 10, 7 * sizeScale, index * 10)
+    this.body3.position.set(index * 10, 7 * sizeScale, index2 * 10)
 
     const bodyShape3 = new CANNON.Sphere(
       1 * sizeScale
     )
     this.bodyBody3 = new CANNON.Body({
       mass: 1 * massScale,
-      position: new CANNON.Vec3(index * 10, 7 * sizeScale, index * 10)
+      position: new CANNON.Vec3(index * 10, 7 * sizeScale, index2 * 10)
     })
     this.bodyBody3.addShape(bodyShape3)
 
     //腳
     this.leftFrontLeg = new THREE.Mesh(footGeo, skinMat)
-    this.leftFrontLeg.position.set(index * 10, 3.5 * sizeScale, index * 10)
+    this.leftFrontLeg.position.set(index * 10, 3.5 * sizeScale, index2 * 10)
 
     const footShape = new CANNON.Cylinder(
       2 * sizeScale, 2 * sizeScale, 7 * sizeScale, 10
     )
     this.leftFrontLegBody = new CANNON.Body({
       mass: 10 * massScale,
-      position: new CANNON.Vec3(index * 10, 3.5 * sizeScale, index * 10)
+      position: new CANNON.Vec3(index * 10, 3.5 * sizeScale, index2 * 10)
     })
     this.leftFrontLegBody.addShape(footShape)
 
