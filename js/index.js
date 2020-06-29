@@ -285,7 +285,7 @@ window.addEventListener('click', function(e) {
         ammoMeshes.length = 0
       }
       // 子彈剛體與網格
-      const ammoBody = new CANNON.Body({ mass: 0.1 })
+      const ammoBody = new CANNON.Body({ mass: 5 })
       ammoBody.addShape(ballShape)
       const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x93882f })
       const ammoMesh = new THREE.Mesh(ballGeometry, ammoMaterial)
