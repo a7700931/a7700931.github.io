@@ -66,7 +66,7 @@ function initCannon() {
   // 鼠標控制器剛體
   // const playerShapeVec3 = new CANNON.Vec3(1, 1, 1)
   // const playerShape = new CANNON.Box(playerShapeVec3)
-  playerBody = new CANNON.Body({ mass: 5 })
+  playerBody = new CANNON.Body({ mass: 0.01 })
   playerBody.addShape(sphereShape)
   playerBody.position.set(-10, 0, 50)
   playerBody.linearDamping = 0.9
@@ -152,8 +152,13 @@ function createGround() {
   world.add(groundBody)
 
   const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
-  const groundMaterial = new THREE.MeshLambertMaterial({ color: 0xa5a5a5 })
-  let ground = new THREE.Mesh(groundGeometry, groundMaterial)
+  const groundMaterial = new THREE.TextureLoader().load('http://163.1.169.224/three.js/examples/textures/terrain/grasslight-big.jpg')
+  
+  const skinMat = new THREE.MeshPhongMaterial({
+    map: groundMaterial // 皮膚貼圖
+  })
+
+  let ground = new THREE.Mesh(groundGeometry, skinMat)
   ground.rotation.x = -Math.PI / 2
   ground.receiveShadow = true
   ground.name = 'floor'
@@ -240,10 +245,10 @@ function init() {
 }
 
 // shooting related settings
-const ballShape = new CANNON.Sphere(0.2)
+const ballShape = new CANNON.Sphere(3)
 const ballGeometry = new THREE.SphereGeometry(ballShape.radius, 32, 32)
 let shootDirection = new THREE.Vector3()
-const shootVelo = 15
+const shootVelo = 50
 let raycaster = new THREE.Raycaster() // create once
 let mouse = new THREE.Vector2() // create once
 
@@ -270,7 +275,7 @@ window.addEventListener('click', function(e) {
     // 左鍵（1）射擊與右鍵（3）疊磚
     if (e.which === 1) {
       // 子彈數量過多時移除舊子彈
-      if (ammos.length > 50) {
+      if (ammos.length > 100) {
         for (let i = 0; i < ammos.length; i++) {
           ammoMeshes[i].geometry.dispose()
           scene.remove(ammoMeshes[i])
@@ -280,7 +285,7 @@ window.addEventListener('click', function(e) {
         ammoMeshes.length = 0
       }
       // 子彈剛體與網格
-      const ammoBody = new CANNON.Body({ mass: 50 })
+      const ammoBody = new CANNON.Body({ mass: 0.1 })
       ammoBody.addShape(ballShape)
       const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x93882f })
       const ammoMesh = new THREE.Mesh(ballGeometry, ammoMaterial)
