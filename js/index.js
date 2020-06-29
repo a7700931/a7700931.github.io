@@ -151,14 +151,15 @@ function createGround() {
   groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
   world.add(groundBody)
 
-  const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
+  //const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
   const groundMaterial = new THREE.TextureLoader().load('img/grasslight-big.jpg')
   groundMaterial.repeat.set(25, 25)
-  const skinMat = new THREE.MeshPhongMaterial({
-    map: groundMaterial // 皮膚貼圖
-  })
+  groundMaterial.anisotropy = 16
+  groundMaterial.encoding = THREE.sRGBEncoding;
 
-  let ground = new THREE.Mesh(groundGeometry, skinMat)
+  const skinMat = new THREE.MeshPhongMaterial( {map: groundMaterial} )
+
+  let ground = new THREE.Mesh(new THREE.PlaneBufferGeometry( 20000, 20000 ), skinMat)
   ground.rotation.x = -Math.PI / 2
   ground.receiveShadow = true
   ground.name = 'floor'
