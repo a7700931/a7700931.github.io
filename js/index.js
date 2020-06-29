@@ -154,9 +154,7 @@ function createGround() {
   const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
   const groundMaterial = new THREE.TextureLoader().load('img/grasslight-big.jpg')
   groundMaterial.repeat.set(25, 25)
-  groundMaterial.anisotropy = 16
-  groundMaterial.encoding = THREE.sRGBEncoding;
-
+  
   const skinMat = new THREE.MeshPhongMaterial( {map: groundMaterial} )
 
   let ground = new THREE.Mesh(groundGeometry, skinMat)
