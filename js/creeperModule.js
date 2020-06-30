@@ -99,7 +99,7 @@ class Creeper {
     this.leftFrontLeg.position.set(index * 10, 3.5 * sizeScale, index2 * 10)
 
     const footShape = new CANNON.Cylinder(
-      2 * sizeScale, 2 * sizeScale, 7 * sizeScale, 10
+      3.7 * sizeScale, 4 * sizeScale, 7 * sizeScale, 10
     )
     this.leftFrontLegBody = new CANNON.Body({
       mass: 10 * massScale,
