@@ -37,6 +37,15 @@ const originData = {
 }
 let gameData = {}
 
+// dino
+var DINOSCALE = 20;  // How big our dino is scaled to
+
+var clock;
+var dino;
+var loader = new THREE.JSONLoader();
+
+var instructions = document.getElementById('instructions');
+
 function initCannon() {
   // 初始化 cannon.js、重力、碰撞偵測
   world = new CANNON.World()
@@ -153,7 +162,7 @@ function createGround() {
 
   const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
   const groundMaterial = new THREE.TextureLoader().load('img/grasslight-big.jpg')
-  const skinMat = new THREE.MeshPhongMaterial( {map: groundMaterial} )
+  const skinMat = new THREE.MeshPhongMaterial({ map: groundMaterial })
   let ground = new THREE.Mesh(groundGeometry, skinMat)
   ground.rotation.x = -Math.PI / 2
   ground.receiveShadow = true
@@ -238,6 +247,28 @@ function init() {
   // createPointsScene()
 
   document.body.appendChild(renderer.domElement)
+
+  // load the dino JSON model and start animating once complete
+  loader.load('./models/dino.json', function (geometry, materials) {
+
+
+    // Get the geometry and materials from the JSON
+    var dinoObject = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
+
+    // Scale the size of the dino
+    dinoObject.scale.set(DINOSCALE, DINOSCALE, DINOSCALE);
+    dinoObject.rotation.y = degreesToRadians(90);
+    dinoObject.position.set(30, 0, -400);
+    dinoObject.name = "dino";
+    scene.add(dinoObject);
+
+    //position.setFromMatrixPosition(dino.matrixWorld);
+    dino = scene.getObjectByName("dino");
+
+    // Call the animate function so that animation begins after the model is loaded
+    animate();
+  })
+
 }
 
 // shooting related settings
@@ -261,7 +292,7 @@ function getShootDir(event, targetVec) {
 }
 
 // shooting event
-window.addEventListener('click', function(e) {
+window.addEventListener('click', function (e) {
   if (controls.enabled == true) {
     // 取得目前玩家位置
     let x = playerBody.position.x
@@ -421,7 +452,7 @@ function render() {
   renderer.render(scene, camera)
 }
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
