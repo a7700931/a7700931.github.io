@@ -235,7 +235,7 @@ function degreesToRadians(degrees) {
 }
 
 function animate() {
-  render();
+  renderer.render(scene, camera);
   requestAnimationFrame(animate);
 
   // Get the change in time between frames
