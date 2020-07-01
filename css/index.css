@@ -32,7 +32,7 @@ button {
 }
 
 .text {
-    text-align: left;
+    text-align: center;
     padding-top: 10px;
     margin: auto 20%;
     font-weight: 800;
@@ -42,7 +42,7 @@ button {
 }
 
 .content {
-    text-align: left;
+    text-align: center;
     font-size: 16px;
     padding-top: 5px;
     font-weight: 600;
