@@ -252,8 +252,8 @@ function animateDino(delta,totaltime) {
 
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
-  dino.translateX(Math.cos(totaltime)*dinoVelocity.z * delta);
-  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta);
+  dino.translateX(Math.cos(totaltime)*100);
+  dino.translateZ(Math.sin(totaltime)*100);
 }
 
 // Three.js init setting
