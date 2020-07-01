@@ -247,8 +247,8 @@ function animate() {
 
 function animateDino(delta) {
   // Gradual slowdown
-  dinoVelocity.x -= dinoVelocity.x * 10.0 * delta;
-  dinoVelocity.z -= dinoVelocity.z * 10.0 * delta;
+  dinoVelocity.x -= dinoVelocity.x * 0.1 * delta;
+  dinoVelocity.z -= dinoVelocity.z * 0.1 * delta;
 
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
