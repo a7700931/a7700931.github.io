@@ -33,7 +33,7 @@ const boxGeometry = new THREE.BoxGeometry(
 // Game flow
 const originData = {
   score: 0,
-  remainingTime: 600000 // 10 min
+  remainingTime: 60000 // 1 min
 }
 let gameData = {}
 
@@ -172,12 +172,13 @@ function createGround() {
 }
 
 const scoreDOM = document.getElementById('score')
-// const remainingTimeDOM = document.getElementById('remainingTime')
+ const remainingTimeDOM = document.getElementById('remainingTime')
 
 function initGameData() {
   gameData = originData
   scoreDOM.textContent = gameData.score
-  // remainingTimeDOM.textContent = gameData.remainingTime / 1000
+  gameData.prevTime = new Date()
+   remainingTimeDOM.textContent = gameData.remainingTime / 1000
 }
 
 function createCreeper() {
@@ -252,8 +253,8 @@ function animateDino(delta,totaltime) {
 
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
-  dino.translateX(Math.cos(totaltime)*dinoVelocity.z * delta * 1000);
-  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta * 1000);
+  dino.translateX(Math.cos(totaltime)*dinoVelocity.z * delta * (1000-10 * dinoVelocity.z * delta));
+  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta * (1000-10 * dinoVelocity.z * delta));
 }
 
 // Three.js init setting
@@ -301,10 +302,10 @@ function init() {
 }
 
 // shooting related settings
-const ballShape = new CANNON.Sphere(3)
-const ballGeometry = new THREE.SphereGeometry(ballShape.radius, 32, 32)
+const ballShape = new CANNON.Sphere(0.5)
+const ballGeometry = new THREE.SphereGeometry(ballShape.radius, 100, 100)
 let shootDirection = new THREE.Vector3()
-const shootVelo = 50
+const shootVelo = 30
 let raycaster = new THREE.Raycaster() // create once
 let mouse = new THREE.Vector2() // create once
 
@@ -341,7 +342,7 @@ window.addEventListener('click', function (e) {
         ammoMeshes.length = 0
       }
       // 子彈剛體與網格
-      const ammoBody = new CANNON.Body({ mass: 5 })
+      const ammoBody = new CANNON.Body({ mass: 1 })
       ammoBody.addShape(ballShape)
       const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x93882f })
       const ammoMesh = new THREE.Mesh(ballGeometry, ammoMaterial)
@@ -365,7 +366,7 @@ window.addEventListener('click', function (e) {
       ammoMesh.position.set(x, y, z)
     } else if (e.which === 3) {
       // 磚塊剛體與網格
-      const brickBody = new CANNON.Body({ mass: 10 })
+      const brickBody = new CANNON.Body({ mass: 1 })
       brickBody.addShape(boxShape)
       const brickMaterial = new THREE.MeshStandardMaterial({ color: 0x0f0201 })
       const brickMesh = new THREE.Mesh(boxGeometry, brickMaterial)
@@ -377,9 +378,9 @@ window.addEventListener('click', function (e) {
       brickMeshes.push(brickMesh)
       getShootDir(e, shootDirection)
       brickBody.velocity.set(
-        shootDirection.x,
-        shootDirection.y,
-        shootDirection.z
+        shootDirection.x*0.01,
+        shootDirection.y*0.01,
+        shootDirection.z*0.01
       )
       // Move the ball outside the player sphere
       x += shootDirection.x * (sphereShape.radius * 1.02 + ballShape.radius)
@@ -466,7 +467,13 @@ function render() {
   }
   controls.update(Date.now() - time)
   time = Date.now()
-
+  //倒數
+  if (parseInt(gameData.remainingTime / 1000) > 0) {
+    gameData.remainingTime -= new Date() - gameData.prevTime
+    remainingTimeDOM.textContent = parseInt(gameData.remainingTime / 1000)
+    gameData.prevTime = new Date()
+  } //else {
+    //handleEndGame()
   // TWEEN.update()
   // explosion
   if (explosion) {

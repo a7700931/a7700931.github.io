@@ -22,6 +22,7 @@ function initPointerLockControls() {
         controls.enabled = true
         blocker.style.display = 'none'
         game_info[0].style.display = 'flex'
+        gameData.prevTime = new Date()
       } else {
         controls.enabled = false
         blocker.style.display = '-webkit-box'
