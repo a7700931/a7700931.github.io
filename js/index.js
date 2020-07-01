@@ -271,7 +271,7 @@ function init() {
     dino = scene.getObjectByName("dino");
 
     // Call the animate function so that animation begins after the model is loaded
-    animate();
+    //animate();
   })
 
 }
