@@ -68,7 +68,7 @@ function initCannon() {
   // const playerShape = new CANNON.Box(playerShapeVec3)
   playerBody = new CANNON.Body({ mass: 5 })
   playerBody.addShape(sphereShape)
-  playerBody.position.set(-10, 0, 50)
+  playerBody.position.set(-10, 1.5, 50)
   playerBody.linearDamping = 0.9
   world.addBody(playerBody)
 
