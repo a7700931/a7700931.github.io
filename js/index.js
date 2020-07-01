@@ -288,7 +288,7 @@ function init() {
     // Scale the size of the dino
     dinoObject.scale.set(DINOSCALE, DINOSCALE, DINOSCALE);
     dinoObject.rotation.y = degreesToRadians(90);
-    dinoObject.position.set(30, 0, -10);
+    dinoObject.position.set(10, 0, 10);
     dinoObject.name = "dino";
     scene.add(dinoObject);
 
