@@ -44,7 +44,7 @@ var dino;
 var loader = new THREE.JSONLoader();
 var instructions = document.getElementById('instructions');
 
-var DINOSPEED = 400.0;
+var DINOSPEED = 1.0;
 var dinoVelocity = new THREE.Vector3();
 
 function initCannon() {
