@@ -319,7 +319,7 @@ window.addEventListener('click', function(e) {
         brickMeshes.length = 0
       }
       // 磚塊剛體與網格
-      const brickBody = new CANNON.Body({ mass: 2 })
+      const brickBody = new CANNON.Body({ mass: 100 })
       brickBody.addShape(boxShape)
       const brickMaterial = new THREE.MeshStandardMaterial({
         color: 0x3a0c0c
