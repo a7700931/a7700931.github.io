@@ -145,7 +145,7 @@ function initLight() {
 
 function initHelper() {
   let axes = new THREE.AxesHelper(20)
-  // scene.add(axes)
+  scene.add(axes)
 }
 
 function createGround() {
