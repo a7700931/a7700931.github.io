@@ -257,6 +257,7 @@ function animateDino(delta) {
 
 // Three.js init setting
 function init() {
+  clock = new THREE.Clock();
   initCannon()
   initScene()
   initCamera()
