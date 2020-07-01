@@ -85,7 +85,7 @@ function initStats() {
 function initScene() {
   scene = new THREE.Scene()
   //scene.background = new THREE.Color(0x80adfc)
-  scene.fog = new THREE.FogExp2(0x80adfc, 0.0008)
+  scene.fog = new THREE.FogExp2(0xffffff, 0.0008)
 }
 
 function initCamera() {
