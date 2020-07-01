@@ -13,8 +13,8 @@ class Explosion {
       opacity: 0.7
     })
 
-    this.pCount = 200
-    this.movementSpeed = 100
+    this.pCount = 150
+    this.movementSpeed = 80
     this.dirs = []
 
     for (let i = 0; i < this.pCount; i++) {
