@@ -228,6 +228,11 @@ function createBoxes(count) {
   }
 }
 
+// Converts degrees to radians
+function degreesToRadians(degrees) {
+  return degrees * Math.PI / 180;
+}
+
 // Three.js init setting
 function init() {
   initCannon()
