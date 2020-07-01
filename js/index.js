@@ -38,7 +38,7 @@ const originData = {
 let gameData = {}
 
 // dino
-var DINOSCALE = 20;  // How big our dino is scaled to
+var DINOSCALE = 2;  // How big our dino is scaled to
 
 var clock;
 var dino;
@@ -263,7 +263,7 @@ function init() {
     // Scale the size of the dino
     dinoObject.scale.set(DINOSCALE, DINOSCALE, DINOSCALE);
     dinoObject.rotation.y = degreesToRadians(90);
-    dinoObject.position.set(30, 0, -400);
+    dinoObject.position.set(30, 0, -20);
     dinoObject.name = "dino";
     scene.add(dinoObject);
 
