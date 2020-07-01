@@ -33,7 +33,7 @@ const boxGeometry = new THREE.BoxGeometry(
 // Game flow
 const originData = {
   score: 0,
-  remainingTime: 10000 // 1 min
+  remainingTime: 30000 // 30 s
 }
 let gameData = {}
 
