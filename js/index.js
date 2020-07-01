@@ -39,12 +39,13 @@ let gameData = {}
 
 // dino
 var DINOSCALE = 2;  // How big our dino is scaled to
-
 var clock;
 var dino;
 var loader = new THREE.JSONLoader();
-
 var instructions = document.getElementById('instructions');
+
+var DINOSPEED = 400.0;
+var dinoVelocity = new THREE.Vector3();
 
 function initCannon() {
   // 初始化 cannon.js、重力、碰撞偵測
@@ -233,6 +234,27 @@ function degreesToRadians(degrees) {
   return degrees * Math.PI / 180;
 }
 
+function animate() {
+  render();
+  requestAnimationFrame(animate);
+
+  // Get the change in time between frames
+  var delta = clock.getDelta();
+  // Update our frames per second monitor
+
+  animateDino(delta);  
+}
+
+function animateDino(delta) {
+  // Gradual slowdown
+  dinoVelocity.x -= dinoVelocity.x * 10.0 * delta;
+  dinoVelocity.z -= dinoVelocity.z * 10.0 * delta;
+
+  dinoVelocity.z += DINOSPEED * delta;
+  // Move the dino
+  dino.translateZ(dinoVelocity.z * delta);
+}
+
 // Three.js init setting
 function init() {
   initCannon()
@@ -271,7 +293,7 @@ function init() {
     dino = scene.getObjectByName("dino");
 
     // Call the animate function so that animation begins after the model is loaded
-    //animate();
+    animate();
   })
 
 }
