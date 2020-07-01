@@ -247,11 +247,13 @@ function animate() {
 
 function animateDino(delta,totaltime) {
   // Gradual slowdown
-  dinoVelocity.x -= dinoVelocity.x * 0.1 * delta;
-  dinoVelocity.z -= dinoVelocity.z * 0.1 * delta;
+  dinoVelocity.x -= dinoVelocity.x * 10 * delta;
+  dinoVelocity.z -= dinoVelocity.z * 10 * delta;
 
+  dinoVelocity.x += DINOSPEED * delta;
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
+  dino.translateX(Math.cos(totaltime)*dinoVelocity.x * delta);
   dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta);
 }
 
