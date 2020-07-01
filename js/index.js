@@ -250,8 +250,10 @@ function animateDino(delta) {
   dinoVelocity.x -= dinoVelocity.x * 0.1 * delta;
   dinoVelocity.z -= dinoVelocity.z * 0.1 * delta;
 
+  dinoVelocity.x += DINOSPEED * delta;
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
+  dino.translateX(dinoVelocity.x * delta);
   dino.translateZ(dinoVelocity.z * delta);
 }
 
