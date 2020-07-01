@@ -85,7 +85,7 @@ function initStats() {
 function initScene() {
   scene = new THREE.Scene()
   //scene.background = new THREE.Color(0x80adfc)
-  scene.fog = new THREE.FogExp2(0xffffff, 0.0008)
+  scene.fog = new THREE.FogExp2(0x80adfc, 0.0008)
 }
 
 function initCamera() {
@@ -101,7 +101,7 @@ function initCamera() {
 
 function initRenderer() {
   renderer = new THREE.WebGLRenderer({ antialias: true })
-  renderer.setClearColor(0x80adfc, 1.0)
+  renderer.setClearColor(0xffffff, 1.0)
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.shadowMap.enabled = true
   renderer.shadowMap.type = 2 // THREE.PCFSoftShadowMap
