@@ -245,7 +245,7 @@ function init() {
 }
 
 // shooting related settings
-const ballShape = new CANNON.Sphere(0.5)
+const ballShape = new CANNON.Sphere(2)
 const ballGeometry = new THREE.SphereGeometry(ballShape.radius, 100, 100)
 let shootDirection = new THREE.Vector3()
 const shootVelo = 30
