@@ -33,19 +33,9 @@ const boxGeometry = new THREE.BoxGeometry(
 // Game flow
 const originData = {
   score: 0,
-  remainingTime: 60000 // 1 min
+  remainingTime: 1000000 // 1 min
 }
 let gameData = {}
-
-// dino
-var DINOSCALE = 5;  // How big our dino is scaled to
-var clock;
-var dino;
-var loader = new THREE.JSONLoader();
-var instructions = document.getElementById('instructions');
-
-var DINOSPEED = 1.0;
-var dinoVelocity = new THREE.Vector3();
 
 function initCannon() {
   // 初始化 cannon.js、重力、碰撞偵測
@@ -76,7 +66,7 @@ function initCannon() {
   // 鼠標控制器剛體
   // const playerShapeVec3 = new CANNON.Vec3(1, 1, 1)
   // const playerShape = new CANNON.Box(playerShapeVec3)
-  playerBody = new CANNON.Body({ mass: 0.01 })
+  playerBody = new CANNON.Body({ mass: 5 })
   playerBody.addShape(sphereShape)
   playerBody.position.set(-10, 0, 50)
   playerBody.linearDamping = 0.9
@@ -94,7 +84,8 @@ function initStats() {
 
 function initScene() {
   scene = new THREE.Scene()
-  scene.fog = new THREE.FogExp2(0x000000, 0.0008)
+  //scene.background = new THREE.Color(0x80adfc)
+  scene.fog = new THREE.FogExp2(0x80adfc, 0.0008)
 }
 
 function initCamera() {
@@ -121,31 +112,31 @@ function initLight() {
   let ambientLight = new THREE.AmbientLight(0x404040)
   scene.add(ambientLight)
 
-  // 點光源
-  pointLight = new THREE.PointLight(0xf0f0f0, 10, 100) // 顏色, 強度, 距離
-  pointLight.castShadow = true // 投影
-  pointLight.position.set(-30, 30, 30)
-  // scene.add(pointLight)
-  light = new THREE.SpotLight(0xffffff)
-  light.position.set(10, 200, 20)
-  light.target.position.set(0, 0, 0)
-  if (true) {
-    light.castShadow = true
-    light.shadow.camera.near = 20
-    light.shadow.camera.far = 50 //camera.far;
-    light.shadow.camera.fov = 40
-    light.shadowMapBias = 0.1
-    light.shadowMapDarkness = 0.7
-    light.shadow.mapSize.width = 2 * 512
-    light.shadow.mapSize.height = 2 * 512
-    //light.shadowCameraVisible = true;
-  }
+// 點光源
+ pointLight = new THREE.PointLight(0xf0f0f0, 10, 100) // 顏色, 強度, 距離
+ pointLight.castShadow = true // 投影
+ pointLight.position.set(-30, 30, 30)
+ // scene.add(pointLight)
+ light = new THREE.SpotLight(0xffffff)
+ light.position.set(10, 200, 20)
+ light.target.position.set(0, 0, 0)
+if (true) {
+  light.castShadow = true
+  light.shadow.camera.near = 20
+  light.shadow.camera.far = 50 //camera.far;
+  light.shadow.camera.fov = 40
+  light.shadowMapBias = 0.1
+  light.shadowMapDarkness = 0.7
+  light.shadow.mapSize.width = 2 * 512
+  light.shadow.mapSize.height = 2 * 512
+  //light.shadowCameraVisible = true;
+ }
   scene.add(light)
 }
 
 function initHelper() {
   let axes = new THREE.AxesHelper(20)
-  scene.add(axes)
+ scene.add(axes)
 }
 
 function createGround() {
@@ -172,16 +163,16 @@ function createGround() {
 }
 
 const scoreDOM = document.getElementById('score')
- const remainingTimeDOM = document.getElementById('remainingTime')
+const remainingTimeDOM = document.getElementById('remainingTime')
 
 function initGameData() {
   gameData = originData
   scoreDOM.textContent = gameData.score
   gameData.prevTime = new Date()
-   remainingTimeDOM.textContent = gameData.remainingTime / 1000
+  remainingTimeDOM.textContent = gameData.remainingTime / 1000
 }
 
-function createCreeper() {
+function createCreeper(num) {
   for (let i = 0; i < 10; i++) {
     creeperObj[i] = new Creeper(1, 1, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 10)
     scene.add(creeperObj[i].creeper)
@@ -230,36 +221,8 @@ function createBoxes(count) {
   }
 }
 
-// Converts degrees to radians
-function degreesToRadians(degrees) {
-  return degrees * Math.PI / 180;
-}
-
-function animate() {
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
-
-  // Get the change in time between frames
-  var delta = clock.getDelta();
-  // Update our frames per second monitor
-  var totaltime = clock.getElapsedTime ();
-  animateDino(delta,totaltime);  
-}
-
-function animateDino(delta,totaltime) {
-  // Gradual slowdown
-  dinoVelocity.x -= dinoVelocity.x * 10 * delta;
-  dinoVelocity.z -= dinoVelocity.z * 10 * delta;
-
-  dinoVelocity.z += DINOSPEED * delta;
-  // Move the dino
-  dino.translateX(Math.cos(totaltime)*dinoVelocity.z * delta * (1000-100 * dinoVelocity.z));
-  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta * (1000-100 * dinoVelocity.z));
-}
-
 // Three.js init setting
 function init() {
-  clock = new THREE.Clock();
   initCannon()
   initScene()
   initCamera()
@@ -273,32 +236,12 @@ function init() {
 
   createGround()
   createCreeper()
+  //createGround()
+  //createCreeper(10)
   //createBoxes(20)
-  // createPointsScene()
+  //createPointsScene()
 
   document.body.appendChild(renderer.domElement)
-
-  // load the dino JSON model and start animating once complete
-  loader.load('./models/dino.json', function (geometry, materials) {
-
-
-    // Get the geometry and materials from the JSON
-    var dinoObject = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
-
-    // Scale the size of the dino
-    dinoObject.scale.set(DINOSCALE, DINOSCALE, DINOSCALE);
-    dinoObject.rotation.y = degreesToRadians(90);
-    dinoObject.position.set(20, 0, -20);
-    dinoObject.name = "dino";
-    scene.add(dinoObject);
-
-    //position.setFromMatrixPosition(dino.matrixWorld);
-    dino = scene.getObjectByName("dino");
-
-    // Call the animate function so that animation begins after the model is loaded
-    animate();
-  })
-
 }
 
 // shooting related settings
@@ -322,7 +265,7 @@ function getShootDir(event, targetVec) {
 }
 
 // shooting event
-window.addEventListener('click', function (e) {
+window.addEventListener('click', function(e) {
   if (controls.enabled == true) {
     // 取得目前玩家位置
     let x = playerBody.position.x
@@ -332,7 +275,7 @@ window.addEventListener('click', function (e) {
     // 左鍵（1）射擊與右鍵（3）疊磚
     if (e.which === 1) {
       // 子彈數量過多時移除舊子彈
-      if (ammos.length > 100) {
+      if (ammos.length > 50) {
         for (let i = 0; i < ammos.length; i++) {
           ammoMeshes[i].geometry.dispose()
           scene.remove(ammoMeshes[i])
@@ -365,10 +308,22 @@ window.addEventListener('click', function (e) {
       ammoBody.position.set(x, y, z)
       ammoMesh.position.set(x, y, z)
     } else if (e.which === 3) {
+      // 磚塊數量過多時移除舊磚塊
+      if (bricks.length > 50) {
+        for (let i = 0; i < bricks.length; i++) {
+          brickMeshes[i].geometry.dispose()
+          scene.remove(brickMeshes[i])
+          world.remove(bricks[i])
+        }
+        bricks.length = 0
+        brickMeshes.length = 0
+      }
       // 磚塊剛體與網格
-      const brickBody = new CANNON.Body({ mass: 1 })
+      const brickBody = new CANNON.Body({ mass: 2 })
       brickBody.addShape(boxShape)
-      const brickMaterial = new THREE.MeshStandardMaterial({ color: 0x0f0201 })
+      const brickMaterial = new THREE.MeshStandardMaterial({
+        color: 0x3a0c0c
+      })
       const brickMesh = new THREE.Mesh(boxGeometry, brickMaterial)
       world.addBody(brickBody)
       scene.add(brickMesh)
@@ -378,9 +333,9 @@ window.addEventListener('click', function (e) {
       brickMeshes.push(brickMesh)
       getShootDir(e, shootDirection)
       brickBody.velocity.set(
-        shootDirection.x*0.01,
-        shootDirection.y*0.01,
-        shootDirection.z*0.01
+        shootDirection.x * 0.01,
+        shootDirection.y * 0.01,
+        shootDirection.z * 0.01
       )
       // Move the ball outside the player sphere
       x += shootDirection.x * (sphereShape.radius * 1.02 + ballShape.radius)
@@ -392,10 +347,15 @@ window.addEventListener('click', function (e) {
   }
 })
 
+function handleEndGame() {
+  localStorage.setItem('NEW_GAME_RESULT', JSON.stringify(gameData))
+  window.location.replace('./result.html')
+}
+
 function render() {
   requestAnimationFrame(render)
   stats.update()
-  // pointsSceneAnimation()
+  //pointsSceneAnimation()
 
   if (controls.enabled) {
     world.step(dt)
@@ -462,18 +422,23 @@ function render() {
         // 計分並顯示到畫面上
         gameData.score += 10000
         scoreDOM.textContent = gameData.score
+        if (gameData.score === 10 * 10000) {
+          handleEndGame()
+        }
       }
+    }
+
+    if (parseInt(gameData.remainingTime / 1000) > 0) {
+      gameData.remainingTime -= new Date() - gameData.prevTime
+      remainingTimeDOM.textContent = parseInt(gameData.remainingTime / 1000)
+      gameData.prevTime = new Date()
+    } else {
+      handleEndGame()
     }
   }
   controls.update(Date.now() - time)
   time = Date.now()
-  //倒數
-  if (parseInt(gameData.remainingTime / 1000) > 0) {
-    gameData.remainingTime -= new Date() - gameData.prevTime
-    remainingTimeDOM.textContent = parseInt(gameData.remainingTime / 1000)
-    gameData.prevTime = new Date()
-  } //else {
-    //handleEndGame()
+
   // TWEEN.update()
   // explosion
   if (explosion) {
@@ -488,7 +453,7 @@ function render() {
   renderer.render(scene, camera)
 }
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', function() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)

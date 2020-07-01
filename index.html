@@ -1,39 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Day 26 - Score Counting</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./img/red.jpg">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/index.css">
+  <title style="color:white">紅酒瓶</title>
 </head>
 <body>
-  <div id="stats"></div>
-  <div id="blocker">
-    <div id="instructions">
-      <span style="font-size:40px">點擊開始</span><br />
-      W, A, S, D：控制移動方向<br />
-      SPACE：跳躍<br />
-      滑鼠：轉動視角<br />
-      左鍵：射擊<br />
-      右鍵：疊磚<br />
-    </div>
-  </div>
-  <div class="game_info">
-    <div>分數：<div id="score"></div></div>
-   <div>剩餘時間：<div id="remainingTime"></div></div> 
-  </div>
+  <header class="verticle_align">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="my-0" style="color:white">紅酒瓶</h1>
+        <button onclick="window.location.href='game.html'" type="button" class="btn btn-lg btn-primary">進入遊戲</button>
+        <h3 class="text" style="color:greenyellow">　　　　　　　　　　　　　組員</h3>
+        <h3 class="text" >
+          <h3 class="content" style="color:greenyellow">　　　　　　　　　　　　　　　　　　  　　　　　　　　 　　周明憲 江晨瑋 周彥君 劉致杰</h3>
 
-  <script src="./lib/three.min.js"></script><!-- r98 -->
-  <script src="./lib/cannon.min.js"></script><!-- 0.6.2 -->
-  <!-- <script src="./lib/OrbitControls.js"></script> -->
-  <script src="./lib/Stats.min.js"></script><!-- r16 -->
-  <script src="./lib/dat.gui.min.js"></script><!-- 0.7.3 -->
-  <script src="./lib/Tween.min.js"></script><!-- 17.2.0 -->
-  <script src="./lib/PointerLockControls.js"></script>
-  <!-- <script src="./lib/CannonDebugRenderer.js"></script> -->
-  <script src="./js/creeperModule.js"></script>
-  <script src="./js/pointsSceneModule.js"></script>
-  <script src="./js/datGuiControlModule.js"></script>
-  <script src="./js/pointerLockControlsModule.js"></script>
-  <script src="./js/explosionModule.js"></script>
-  <script src="./js/index.js"></script>
+        </h3>
+      </div>
+    </div>
+  </header>
 </body>
 </html>

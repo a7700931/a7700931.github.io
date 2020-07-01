@@ -102,7 +102,7 @@ class Creeper {
       3.7 * sizeScale, 4 * sizeScale, 7 * sizeScale, 10
     )
     this.leftFrontLegBody = new CANNON.Body({
-      mass: 10 * massScale,
+      mass: 65 * massScale,
       position: new CANNON.Vec3(index * 10, 3.5 * sizeScale, index2 * 10)
     })
     this.leftFrontLegBody.addShape(footShape)
@@ -273,6 +273,9 @@ class Creeper {
   creeperFeetWalk() {
     this.walkSpeed += 0.04
     this.leftFrontLeg.rotation.x = Math.sin(this.walkSpeed) / 4
+    this.leftBackLeg.rotation.x = -Math.sin(this.walkSpeed) / 4
+    this.rightFrontLeg.rotation.x = -Math.sin(this.walkSpeed) / 4
+    this.rightBackLeg.rotation.x = Math.sin(this.walkSpeed) / 4
   }
 
   creeperScaleBody() {
