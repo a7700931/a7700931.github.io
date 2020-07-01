@@ -287,7 +287,7 @@ window.addEventListener('click', function(e) {
             // 子彈剛體與網格
             const ammoBody = new CANNON.Body({ mass: 10 })
             ammoBody.addShape(ballShape)
-            const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x93882f })
+            const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x81D8D0 })
             const ammoMesh = new THREE.Mesh(ballGeometry, ammoMaterial)
             world.addBody(ammoBody)
             scene.add(ammoMesh)
