@@ -122,12 +122,12 @@ function initLight() {
   scene.add(ambientLight)
 
   // 點光源
-  pointLight = new THREE.PointLight(0xf0f0f0, 1, 100) // 顏色, 強度, 距離
+  pointLight = new THREE.PointLight(0xf0f0f0, 10, 100) // 顏色, 強度, 距離
   pointLight.castShadow = true // 投影
   pointLight.position.set(-30, 30, 30)
   // scene.add(pointLight)
   light = new THREE.SpotLight(0xffffff)
-  light.position.set(10, 30, 20)
+  light.position.set(10, 200, 20)
   light.target.position.set(0, 0, 0)
   if (true) {
     light.castShadow = true
@@ -287,7 +287,7 @@ function init() {
     // Scale the size of the dino
     dinoObject.scale.set(DINOSCALE, DINOSCALE, DINOSCALE);
     dinoObject.rotation.y = degreesToRadians(90);
-    dinoObject.position.set(10, 0, 20);
+    dinoObject.position.set(0, 0, -20);
     dinoObject.name = "dino";
     scene.add(dinoObject);
 
