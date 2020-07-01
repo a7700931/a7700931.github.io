@@ -245,7 +245,7 @@ function init() {
 }
 
 // shooting related settings
-const ballShape = new CANNON.Sphere(2)
+const ballShape = new CANNON.Sphere(1)
 const ballGeometry = new THREE.SphereGeometry(ballShape.radius, 100, 100)
 let shootDirection = new THREE.Vector3()
 const shootVelo = 30
@@ -285,7 +285,7 @@ window.addEventListener('click', function(e) {
         ammoMeshes.length = 0
       }
       // 子彈剛體與網格
-      const ammoBody = new CANNON.Body({ mass: 1 })
+      const ammoBody = new CANNON.Body({ mass: 10 })
       ammoBody.addShape(ballShape)
       const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x93882f })
       const ammoMesh = new THREE.Mesh(ballGeometry, ammoMaterial)
