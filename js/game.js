@@ -101,7 +101,7 @@ function initCamera() {
 
 function initRenderer() {
   renderer = new THREE.WebGLRenderer({ antialias: true })
-  renderer.setClearColor(0xffffff, 1.0)
+  renderer.setClearColor(0x80adfc, 1.0)
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.shadowMap.enabled = true
   renderer.shadowMap.type = 2 // THREE.PCFSoftShadowMap
