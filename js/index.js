@@ -38,7 +38,7 @@ const originData = {
 let gameData = {}
 
 // dino
-var DINOSCALE = 10;  // How big our dino is scaled to
+var DINOSCALE = 7;  // How big our dino is scaled to
 var clock;
 var dino;
 var loader = new THREE.JSONLoader();
@@ -252,8 +252,8 @@ function animateDino(delta,totaltime) {
 
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
-  dino.translateX(Math.cos(totaltime)*dinoVelocity.z * delta * 600);
-  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta * 600);
+  dino.translateX(Math.cos(totaltime)*dinoVelocity.z * delta * 800);
+  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta * 800);
 }
 
 // Three.js init setting
