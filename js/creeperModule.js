@@ -102,7 +102,7 @@ class Creeper {
       3.7 * sizeScale, 4 * sizeScale, 7 * sizeScale, 10
     )
     this.leftFrontLegBody = new CANNON.Body({
-      mass: 65 * massScale,
+      mass: 100 * massScale,
       position: new CANNON.Vec3(index * 10, 3.5 * sizeScale, index2 * 10)
     })
     this.leftFrontLegBody.addShape(footShape)
