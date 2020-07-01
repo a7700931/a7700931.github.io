@@ -152,7 +152,7 @@ function createGround() {
   groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
   world.add(groundBody)
 
-  const groundGeometry = new THREE.PlaneGeometry(300, 300, 50, 50)
+  const groundGeometry = new THREE.PlaneGeometry(500, 500, 50, 50)
   const groundMaterial = new THREE.TextureLoader().load('img/grasslight-big.jpg')
   const skinMat = new THREE.MeshPhongMaterial({ map: groundMaterial })
   let ground = new THREE.Mesh(groundGeometry, skinMat)
