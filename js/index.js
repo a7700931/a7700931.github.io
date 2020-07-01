@@ -241,18 +241,18 @@ function animate() {
   // Get the change in time between frames
   var delta = clock.getDelta();
   // Update our frames per second monitor
-
-  animateDino(delta);  
+  var totaltime = clock.getElapsedTime ();
+  animateDino(delta,totaltime);  
 }
 
-function animateDino(delta) {
+function animateDino(delta,totaltime) {
   // Gradual slowdown
   dinoVelocity.x -= dinoVelocity.x * 0.1 * delta;
   dinoVelocity.z -= dinoVelocity.z * 0.1 * delta;
 
   dinoVelocity.z += DINOSPEED * delta;
   // Move the dino
-  dino.translateZ(Math.sin(dinoVelocity.z * delta));
+  dino.translateZ(Math.sin(totaltime)*dinoVelocity.z * delta);
 }
 
 // Three.js init setting
