@@ -118,7 +118,7 @@ function initLight() {
     pointLight.position.set(-30, 30, 30)
         // scene.add(pointLight)
     light = new THREE.SpotLight(0xffffff)
-    light.position.set(10, 200, 20)
+    light.position.set(10, 500, 20)
     light.target.position.set(0, 0, 0)
     if (true) {
         light.castShadow = true
@@ -152,17 +152,10 @@ function createGround() {
     groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
     world.add(groundBody)
 
-    const groundTexture = textureLoader.load('./img/grasslight-big.jpg')
-    groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping
-    groundTexture.repeat.set(25, 25)
-    groundTexture.anisotropy = 16
-
-    const groundMaterial = new THREE.MeshLambertMaterial({ map: groundTexture })
-
-    ground = new THREE.Mesh(
-        new THREE.PlaneBufferGeometry(1000, 1000),
-        groundMaterial
-    )
+    const groundGeometry = new THREE.PlaneGeometry(500, 500, 50, 50)
+    const groundMaterial = new THREE.TextureLoader().load('img/grasslight-big.jpg')
+    const skinMat = new THREE.MeshPhongMaterial({ map: groundMaterial })
+    let ground = new THREE.Mesh(groundGeometry, skinMat)
     ground.rotation.x = -Math.PI / 2
     ground.receiveShadow = true
     ground.name = 'floor'
