@@ -33,7 +33,7 @@ const boxGeometry = new THREE.BoxGeometry(
 // Game flow
 const originData = {
     score: 0,
-    remainingTime: 30000 // 30 s
+    remainingTime: 60000 // 60 s
 }
 let gameData = {}
 
@@ -97,7 +97,19 @@ function initCamera() {
         )
         // camera.position.set(20, 20, 20)
         // camera.lookAt(scene.position)
+        camera.add(this.createCrosshair())
 }
+
+function createCrosshair() {
+    const geometry = new THREE.CircleGeometry( 0.005, 16 );
+    const material = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        opacity: 0.5,
+        transparent: true
+    });
+    const crosshair = new THREE.Mesh(geometry,material);
+    crosshair.position.z = -0.5;
+    return crosshair;}
 
 function initRenderer() {
     renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -286,7 +298,7 @@ window.addEventListener('click', function(e) {
                 ammoMeshes.length = 0
             }
             // 子彈剛體與網格
-            const ammoBody = new CANNON.Body({ mass: 10 })
+            const ammoBody = new CANNON.Body({ mass: 2 })
             ammoBody.addShape(ballShape)
             const ammoMaterial = new THREE.MeshStandardMaterial({ color: 0x7CEECE })
             const ammoMesh = new THREE.Mesh(ballGeometry, ammoMaterial)
