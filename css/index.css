@@ -33,7 +33,7 @@ button {
 
 .text {
     text-align: center;
-    padding-top: 10px;
+    padding-top: 16px;
     margin: auto 20%;
     font-weight: 800;
     padding-bottom: 10px;
@@ -43,7 +43,7 @@ button {
 
 .content {
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     padding-top: 5px;
     font-weight: 600;
     color: greenyellow;
